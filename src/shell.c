@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Fri Mar  3 02:18:12 2017 romain pillot
-** Last update Fri Mar  3 07:11:10 2017 romain pillot
+** Last update Fri Mar  3 07:51:40 2017 romain pillot
 */
 
 #include "minishell.h"
@@ -15,6 +15,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
+
+static void     exit_handle()
+{
+  display_char('\n');
+  display_prompt();
+}
 
 static void	display_prompt()
 {
@@ -32,12 +38,6 @@ static void	display_prompt()
     }
   else
     perror("getcwd");
-}
-
-static void	exit_handle()
-{
-  display_char('\n');
-  display_prompt();
 }
 
 static void	execute(t_shell *shell)
@@ -60,7 +60,7 @@ void	launch(t_shell *shell)
       if (isatty)
 	display_prompt();
       if (!(shell->cmd = scan_line(shell->file, shell)))
-	shell->exit(shell, EXIT_FAILURE, isatty ? "exit\n" : NULL);
+	shell->exit(shell, EXIT_SUCCESS, isatty ? "exit\n" : NULL);
       else
 	{
 	  execute(shell);
