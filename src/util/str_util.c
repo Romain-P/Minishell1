@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Fri Mar  3 04:26:23 2017 romain pillot
-** Last update Fri Mar  3 05:08:39 2017 romain pillot
+** Last update Fri Mar  3 16:25:43 2017 romain pillot
 */
 
 #include <stdlib.h>
@@ -53,4 +53,25 @@ char	*rev_substring(char *str,
     nw[k++] = str[i];
   nw[k] = 0;
   return (nw);
+}
+
+char    *trim(char *str)
+{
+  int   i;
+  int   j;
+
+  i = (j = 0);
+  while(str && str[i])
+    {
+      if (str[i] != ' ' && str[i] != '\t')
+	{
+	  if (i && j && (str[i - 1] == ' ' || str [i - 1] == '\t'))
+	    str[j++] = ' ';
+	  str[j++] = str[i++];
+	}
+      else
+	i++;
+    }
+  str[j] = 0;
+  return (str);
 }
