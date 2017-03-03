@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Fri Mar  3 02:18:12 2017 romain pillot
-** Last update Fri Mar  3 07:51:40 2017 romain pillot
+** Last update Fri Mar  3 07:53:42 2017 romain pillot
 */
 
 #include "minishell.h"
@@ -15,12 +15,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
-
-static void     exit_handle()
-{
-  display_char('\n');
-  display_prompt();
-}
 
 static void	display_prompt()
 {
@@ -38,6 +32,12 @@ static void	display_prompt()
     }
   else
     perror("getcwd");
+}
+
+static void     exit_handle()
+{
+  display_char('\n');
+  display_prompt();
 }
 
 static void	execute(t_shell *shell)
