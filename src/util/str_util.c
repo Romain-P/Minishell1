@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Fri Mar  3 04:26:23 2017 romain pillot
-** Last update Mon Mar  6 02:44:59 2017 romain pillot
+** Last update Mon Mar  6 02:47:25 2017 romain pillot
 */
 
 #include <stdlib.h>
@@ -32,7 +32,7 @@ int	count_char(char *str, char c)
   return (j);
 }
 
-char	*rev_substring(char *str,
+char	*rev_substr(char *str,
 		       const char c,
 		       const int index)
 {
@@ -76,7 +76,7 @@ char    *trim(char *str)
   return (str);
 }
 
-bool	equals(char *a, char *b)
+bool	equalstr(char *a, char *b)
 {
   if (!a || !b)
     return (!a && !b);

@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Mar  2 16:17:22 2017 romain pillot
-** Last update Mon Mar  6 02:27:31 2017 romain pillot
+** Last update Mon Mar  6 02:47:42 2017 romain pillot
 */
 
 #ifndef UTIL_H_
@@ -23,10 +23,10 @@ void    display_digit(int i);
 
 int	count_char(char *str, char c);
 
-char	*rev_substring(char *str, char c, int index);
+char	*rev_substr(char *str, char c, int index);
 
 char	*trim(char *str);
 
-bool	equals(char *a, char *b);
+bool	equalstr(char *a, char *b);
 
 #endif /* !UTIL_H_ */

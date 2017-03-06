@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Fri Mar  3 02:18:12 2017 romain pillot
-** Last update Mon Mar  6 02:44:23 2017 romain pillot
+** Last update Mon Mar  6 02:48:06 2017 romain pillot
 */
 
 #include "minishell.h"
@@ -25,7 +25,7 @@ static void	display_prompt()
   if (getcwd(path, 1024))
     {
       display(count_char(path, '/') > 2 ?
-	      (sub = rev_substring(path, '/', 2)) : path);
+	      (sub = rev_substr(path, '/', 2)) : path);
       display("> ");
       if (sub)
 	free(sub);
