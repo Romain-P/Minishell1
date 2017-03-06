@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Mar  2 16:17:22 2017 romain pillot
-** Last update Mon Mar  6 02:47:42 2017 romain pillot
+** Last update Mon Mar  6 03:21:42 2017 romain pillot
 */
 
 #ifndef UTIL_H_
@@ -25,7 +25,7 @@ int	count_char(char *str, char c);
 
 char	*rev_substr(char *str, char c, int index);
 
-char	*trim(char *str);
+char	*trimstr(char *str);
 
 bool	equalstr(char *a, char *b);
 

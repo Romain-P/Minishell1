@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Fri Mar  3 04:26:23 2017 romain pillot
-** Last update Mon Mar  6 02:47:25 2017 romain pillot
+** Last update Mon Mar  6 03:21:32 2017 romain pillot
 */
 
 #include <stdlib.h>
@@ -54,7 +54,7 @@ char	*rev_substr(char *str,
   return (nw);
 }
 
-char    *trim(char *str)
+char    *trimstr(char *str)
 {
   int   i;
   int   j;

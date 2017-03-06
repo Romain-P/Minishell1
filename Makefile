@@ -5,7 +5,7 @@
 ## Login   <jordan.roucom@epitech.net>
 ## 
 ## Started on  Sat Oct 29 17:09:21 2016 romain pillot
-## Last update Fri Mar  3 05:05:50 2017 romain pillot
+## Last update Mon Mar  6 03:15:01 2017 romain pillot
 ##
 
 CC	=	gcc
@@ -16,6 +16,7 @@ RM	=	rm -f
 
 SRCS	=	src/main.c		\
 		src/shell.c		\
+		src/command.c		\
 		src/util/display.c	\
 		src/util/scanner.c	\
 		src/util/str_util.c

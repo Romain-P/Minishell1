@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Fri Mar  3 02:18:12 2017 romain pillot
-** Last update Mon Mar  6 02:48:06 2017 romain pillot
+** Last update Mon Mar  6 03:21:54 2017 romain pillot
 */
 
 #include "minishell.h"
@@ -56,7 +56,7 @@ void	launch(t_shell *shell, int file)
     {
       if (shell->isatty)
 	display_prompt();
-      if (!(cmd_line = trim(scan_line(file))))
+      if (!(cmd_line = trimstr(scan_line(file))))
 	shell->exit(shell, EXIT_SUCCESS, shell->isatty ? "exit\n" : NULL);
       else
 	{
