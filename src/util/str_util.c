@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Fri Mar  3 04:26:23 2017 romain pillot
-** Last update Fri Mar  3 16:25:43 2017 romain pillot
+** Last update Mon Mar  6 02:44:59 2017 romain pillot
 */
 
 #include <stdlib.h>
@@ -20,8 +20,7 @@ static int	len(char *str)
   return (i);
 }
 
-int	count_char(char *str,
-		   char c)
+int	count_char(char *str, char c)
 {
   int	i;
   int	j;
@@ -72,6 +71,17 @@ char    *trim(char *str)
       else
 	i++;
     }
-  str[j] = 0;
+  if (str)
+    str[j] = 0;
   return (str);
+}
+
+bool	equals(char *a, char *b)
+{
+  if (!a || !b)
+    return (!a && !b);
+  while (*a || *b)
+    if (*a++ != *b++)
+      return (false);
+  return (true);
 }

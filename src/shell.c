@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Fri Mar  3 02:18:12 2017 romain pillot
-** Last update Fri Mar  3 07:53:42 2017 romain pillot
+** Last update Mon Mar  6 02:44:23 2017 romain pillot
 */
 
 #include "minishell.h"
@@ -40,31 +40,28 @@ static void     exit_handle()
   display_prompt();
 }
 
-static void	execute(t_shell *shell)
+static void	parse(t_shell *shell, char *cmd_line)
 {
   display("executed: ");
-  display(shell->cmd);
+  display(cmd_line);
   display_char('\n');
 }
 
-void	launch(t_shell *shell)
+void	launch(t_shell *shell, int file)
 {
-  char	path[1024];
-  int	file;
-  bool	isatty;
+  char	*cmd_line;
 
   signal(SIGINT, &exit_handle);
-  isatty = shell->isatty;
   while (shell->status == -1)
     {
-      if (isatty)
+      if (shell->isatty)
 	display_prompt();
-      if (!(shell->cmd = scan_line(shell->file, shell)))
-	shell->exit(shell, EXIT_SUCCESS, isatty ? "exit\n" : NULL);
+      if (!(cmd_line = trim(scan_line(file))))
+	shell->exit(shell, EXIT_SUCCESS, shell->isatty ? "exit\n" : NULL);
       else
 	{
-	  execute(shell);
-	  free(shell->cmd);
+	  parse(shell, cmd_line);
+	  free(cmd_line);
 	}
     }
 }

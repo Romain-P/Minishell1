@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Tue Feb 21 11:35:52 2017 romain pillot
-** Last update Fri Mar  3 06:31:12 2017 romain pillot
+** Last update Fri Mar  3 16:35:33 2017 romain pillot
 */
 
 #include <stdlib.h>
@@ -37,14 +37,14 @@ static char	*app(char *str, char c)
   return (ap);
 }
 
-char	*scan_line(const int fd, t_shell *shell)
+char	*scan_line(const int file)
 {
   char	*str;
   char	buffer[1];
   int	error;
 
   str = NULL;
-  while ((error = read(fd, buffer, 1)))
+  while ((error = read(file, buffer, 1)))
     {
       if (buffer[0] == '\n')
 	return (str ? str : app(NULL, 0));

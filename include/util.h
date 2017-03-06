@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Mar  2 16:17:22 2017 romain pillot
-** Last update Fri Mar  3 16:26:09 2017 romain pillot
+** Last update Mon Mar  6 02:27:31 2017 romain pillot
 */
 
 #ifndef UTIL_H_
@@ -13,7 +13,7 @@
 
 # include "minishell.h"
 
-char	*scan_line(const int fd, t_shell *shell);
+char	*scan_line(const int file);
 
 void    display(char *str);
 
@@ -26,5 +26,7 @@ int	count_char(char *str, char c);
 char	*rev_substring(char *str, char c, int index);
 
 char	*trim(char *str);
+
+bool	equals(char *a, char *b);
 
 #endif /* !UTIL_H_ */

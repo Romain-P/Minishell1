@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Nov 24 11:14:29 2016 romain pillot
-** Last update Fri Mar  3 14:44:06 2017 romain pillot
+** Last update Mon Mar  6 02:42:01 2017 romain pillot
 */
 
 #include <stdlib.h>
@@ -37,18 +37,19 @@ int		main(int ac, char **args, char **env)
 {
   t_shell	*shell;
   int		status;
+  int		file;
 
   if (!(shell = malloc(sizeof(t_shell))))
     return (EXIT_FAILURE);
   shell->status = -1;
   shell->env = env;
-  if ((shell->file = ac > 1 ? open_file(args[1], shell) : 0) != -1)
+  if ((file = ac > 1 ? open_file(args[1], shell) : 0) != -1)
     {
-      shell->isatty = isatty(shell->file);
+      shell->isatty = isatty(file);
       shell->exit = &exit_shell;
-      launch(shell);
+      launch(shell, file);
       if (ac > 1 && shell->status != EXIT_FAILURE)
-	close(shell->file);
+	close(file);
     }
   status = shell->status;
   free(shell);
