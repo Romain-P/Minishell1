@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Fri Mar  3 17:38:01 2017 romain pillot
-** Last update Fri Mar  3 19:02:31 2017 romain pillot
+** Last update Mon Mar  6 02:45:53 2017 romain pillot
 */
 
 #ifndef COMMAND_H_
@@ -13,9 +13,9 @@
 
 typedef struct	s_command
 {
-  char		*name;
+  char		*path;
   char		**args;
-  void		(*execute)(char **args);
+  void		(*execute)(char *path, char **args);
 }		t_command;
 
 #endif /* !COMMAND_H_ */
