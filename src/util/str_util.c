@@ -5,20 +5,20 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Fri Mar  3 04:26:23 2017 romain pillot
-** Last update Wed Mar  8 11:40:09 2017 romain pillot
+** Last update Wed Mar  8 21:21:53 2017 romain pillot
 */
 
 #include <stdlib.h>
 #include "util.h"
 
-int	count_char(char *str, char c)
+int	count_char(char *str, char c, bool sepator)
 {
   int	i;
   int	j;
 
   i = (j = 0);
   while (str && str[i] && ++i)
-    if (str[i] == c)
+    if (i > 0 && str[i - 1] != c && str[i] == c)
       j++;
   return (j);
 }
@@ -87,7 +87,7 @@ char    **splitstr(char *str, char delimiter)
 
   i = -1;
   hold = str;
-  tab = malloc(sizeof(char *) * ((count_char(str, delimiter) + 2)));
+  tab = malloc(sizeof(char *) * ((count_char(str, delimiter, true) + 2)));
   k = 0;
   while (str[++i])
     if (str[(j = i)] == delimiter || !(str[(j = i + 1)]))

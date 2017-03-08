@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Nov 24 11:14:29 2016 romain pillot
-** Last update Mon Mar  6 15:42:09 2017 romain pillot
+** Last update Wed Mar  8 21:05:57 2017 romain pillot
 */
 
 #include <stdlib.h>
@@ -13,6 +13,7 @@
 #include "util.h"
 #include <stdio.h>
 #include <fcntl.h>
+#include "environment.h"
 
 static void	exit_shell(t_shell *shell, int status, char *msg)
 {
@@ -42,7 +43,7 @@ int		main(int ac, char **args, char **env)
   if (!(shell = malloc(sizeof(t_shell))))
     return (EXIT_FAILURE);
   shell->status = -1;
-  shell->env = env;
+  shell->env = copy_env(env, NULL);
   if ((file = ac > 1 ? open_file(args[1], shell) : 0) != -1)
     {
       shell->isatty = isatty(file);
@@ -52,6 +53,7 @@ int		main(int ac, char **args, char **env)
 	close(file);
     }
   status = shell->status;
+  free_tab(shell->env);
   free(shell);
   return (status);
 }
