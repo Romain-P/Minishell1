@@ -5,7 +5,7 @@
 ## Login   <jordan.roucom@epitech.net>
 ## 
 ## Started on  Sat Oct 29 17:09:21 2016 romain pillot
-## Last update Mon Mar  6 03:15:01 2017 romain pillot
+## Last update Wed Mar  8 10:33:55 2017 romain pillot
 ##
 
 CC	=	gcc
@@ -14,12 +14,12 @@ NAME	=	mysh
 
 RM	=	rm -f
 
-SRCS	=	src/main.c		\
-		src/shell.c		\
-		src/command.c		\
-		src/util/display.c	\
-		src/util/scanner.c	\
-		src/util/str_util.c
+SRCS	=	src/main.c			\
+		src/shell.c			\
+		src/util/display.c		\
+		src/util/scanner.c		\
+		src/util/str_util.c		\
+		src/util/str_util_more.c	
 
 OBJS	=	$(SRCS:.c=.o)
 

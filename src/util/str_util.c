@@ -5,20 +5,11 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Fri Mar  3 04:26:23 2017 romain pillot
-** Last update Mon Mar  6 03:21:32 2017 romain pillot
+** Last update Wed Mar  8 11:40:09 2017 romain pillot
 */
 
 #include <stdlib.h>
 #include "util.h"
-
-static int	len(char *str)
-{
-  int		i;
-
-  i = 0;
-  while (str && str[i] && ++i);
-  return (i);
-}
 
 int	count_char(char *str, char c)
 {
@@ -41,7 +32,7 @@ char	*rev_substr(char *str,
   int	k;
   char	*nw;
 
-  i = (j = len(str));
+  i = (j = str_length(str));
   k = 0;
   while (--i >= 0)
     if (str && str[i] == c && ++k == index && !(k = 0))
@@ -84,4 +75,28 @@ bool	equalstr(char *a, char *b)
     if (*a++ != *b++)
       return (false);
   return (true);
+}
+
+char    **splitstr(char *str, char delimiter)
+{
+  char  **tab;
+  char  *hold;
+  int   i;
+  int   j;
+  int   k;
+
+  i = -1;
+  hold = str;
+  tab = malloc(sizeof(char *) * ((count_char(str, delimiter) + 2)));
+  k = 0;
+  while (str[++i])
+    if (str[(j = i)] == delimiter || !(str[(j = i + 1)]))
+      {
+	if (!j || (str[j - 1]))
+	  tab[k++] = hold;
+	hold = str + j + 1;
+	str[j] = 0;
+      }
+  tab[k] = 0;
+  return (tab);
 }

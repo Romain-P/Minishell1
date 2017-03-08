@@ -5,13 +5,13 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Tue Feb  7 14:39:21 2017 romain pillot
-** Last update Sun Feb 26 21:39:04 2017 romain pillot
+** Last update Wed Mar  8 10:09:07 2017 romain pillot
 */
 
 #include "util.h"
 #include <unistd.h>
 
-static int	str_length(char *str)
+int	str_length(char *str)
 {
   int		i;
 
