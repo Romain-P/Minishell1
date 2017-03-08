@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Wed Mar  8 10:25:12 2017 romain pillot
-** Last update Wed Mar  8 10:33:09 2017 romain pillot
+** Last update Wed Mar  8 14:24:13 2017 romain pillot
 */
 
 #include <stdbool.h>
@@ -13,7 +13,7 @@
 
 bool	start_withstr(char *str, char *charset)
 {
-  if (!str || !charset)
+  if (str || !charset)
     return (false);
   while (*charset)
     if (str++ != charset++)

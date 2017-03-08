@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Mar  2 16:17:22 2017 romain pillot
-** Last update Wed Mar  8 10:10:16 2017 romain pillot
+** Last update Wed Mar  8 14:24:42 2017 romain pillot
 */
 
 #ifndef UTIL_H_
@@ -32,5 +32,9 @@ bool	equalstr(char *a, char *b);
 char	**splitstr(char *str, char delimiter);
 
 int	str_length(char *str);
+
+bool	start_withstr(char *str, char *charset);
+
+char	*tab_start_withstr(char **tab, char *charset);
 
 #endif /* !UTIL_H_ */
