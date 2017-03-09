@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Nov 24 11:14:29 2016 romain pillot
-** Last update Wed Mar  8 22:56:32 2017 romain pillot
+** Last update Thu Mar  9 21:03:31 2017 romain pillot
 */
 
 #include <stdlib.h>
@@ -47,11 +47,11 @@ static	void	set_pointers(t_shell *shell)
 
 int	get_cmd_index(char *str)
 {
-  return (equalstr(str, "cd") ? 0 :
-	  equalstr(str, "setenv") ? 1 :
-	  equalstr(str, "unsetenv") ? 2 :
-	  equalstr(str, "env") ? 3 :
-	  equalstr(str, "exit") ? 4 : 5);
+  return (equalstr(str, "cd") ? CD :
+	  equalstr(str, "setenv") ? SETENV :
+	  equalstr(str, "unsetenv") ? UNSETENV :
+	  equalstr(str, "env") ? ENV :
+	  equalstr(str, "exit") ? EXIT : SEARCH_CMD);
 }
 
 int		main(int ac, char **args, char **env)
