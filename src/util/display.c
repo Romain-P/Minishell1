@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Tue Feb  7 14:39:21 2017 romain pillot
-** Last update Wed Mar  8 10:09:07 2017 romain pillot
+** Last update Thu Mar  9 16:16:07 2017 romain pillot
 */
 
 #include "util.h"
@@ -16,13 +16,14 @@ int	str_length(char *str)
   int		i;
 
   i = 0;
-  while (str[i] && ++i);
+  while (str && str[i] && ++i);
   return (i);
 }
 
 void	display(char *str)
 {
-  write(1, str, str_length(str));
+  if (str)
+    write(1, str, str_length(str));
 }
 
 void	display_digit(int digit)

@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Wed Mar  8 10:25:12 2017 romain pillot
-** Last update Wed Mar  8 21:05:21 2017 romain pillot
+** Last update Thu Mar  9 13:59:14 2017 romain pillot
 */
 
 #include <stdbool.h>
@@ -27,9 +27,30 @@ char	*strdupl(char *str)
   char	*new;
   char	*hold;
 
-  hold = (new = malloc(sizeof(char) * (str_length(str) + 1)));
+  if (!(hold = (new = malloc(sizeof(char) * (str_length(str) + 1)))))
+    return (NULL);
   while (*str)
     *new++ = *str++;
   *new = 0;
+  return (hold);
+}
+
+char	*concatstr(char *a, char *b, bool free_a)
+{
+  char	*concat;
+  char	*hold;
+  char	*hold_a;
+
+  if (!(hold = (concat = malloc(sizeof(char) * (str_length(a) +
+						str_length(b) + 1)))))
+    return (NULL);
+  hold_a = a;
+  while (a && *a)
+    *concat++ = *a++;
+  while (b && *b)
+    *concat++ = *b++;
+  *concat = 0;
+  if (free_a && hold_a)
+    free(hold_a);
   return (hold);
 }

@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Nov 24 11:14:29 2016 romain pillot
-** Last update Wed Mar  8 21:05:57 2017 romain pillot
+** Last update Wed Mar  8 22:56:32 2017 romain pillot
 */
 
 #include <stdlib.h>
@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include "environment.h"
+#include "builtin.h"
 
 static void	exit_shell(t_shell *shell, int status, char *msg)
 {
@@ -34,6 +35,25 @@ static int	open_file(const char *file_name, t_shell *shell)
   return (file);
 }
 
+static	void	set_pointers(t_shell *shell)
+{
+  shell->cmds[CD] = &cd_alt;
+  shell->cmds[ENV] = &env_alt;
+  shell->cmds[SETENV] = &setenv_alt;
+  shell->cmds[UNSETENV] = &unsetenv_alt;
+  shell->cmds[EXIT] = &exit_alt;
+  shell->cmds[SEARCH_CMD] = &search_cmd;
+}
+
+int	get_cmd_index(char *str)
+{
+  return (equalstr(str, "cd") ? 0 :
+	  equalstr(str, "setenv") ? 1 :
+	  equalstr(str, "unsetenv") ? 2 :
+	  equalstr(str, "env") ? 3 :
+	  equalstr(str, "exit") ? 4 : 5);
+}
+
 int		main(int ac, char **args, char **env)
 {
   t_shell	*shell;
@@ -42,6 +62,7 @@ int		main(int ac, char **args, char **env)
 
   if (!(shell = malloc(sizeof(t_shell))))
     return (EXIT_FAILURE);
+  set_pointers(shell);
   shell->status = -1;
   shell->env = copy_env(env, NULL);
   if ((file = ac > 1 ? open_file(args[1], shell) : 0) != -1)

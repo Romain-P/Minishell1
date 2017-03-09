@@ -5,12 +5,12 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Wed Mar  8 13:37:57 2017 romain pillot
-** Last update Wed Mar  8 13:44:08 2017 romain pillot
+** Last update Wed Mar  8 22:53:36 2017 romain pillot
 */
 
 #include "builtin.h"
 
-void	unsetunv(t_shell *shell, char **args)
+void	unsetenv_alt(t_shell *shell, char **args)
 {
   
 }

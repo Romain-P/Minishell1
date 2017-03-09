@@ -5,20 +5,20 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Fri Mar  3 04:26:23 2017 romain pillot
-** Last update Wed Mar  8 21:21:53 2017 romain pillot
+** Last update Thu Mar  9 13:30:50 2017 romain pillot
 */
 
 #include <stdlib.h>
 #include "util.h"
 
-int	count_char(char *str, char c, bool sepator)
+int	count_char(char *str, char c)
 {
   int	i;
   int	j;
 
   i = (j = 0);
   while (str && str[i] && ++i)
-    if (i > 0 && str[i - 1] != c && str[i] == c)
+    if (str[i] == c)
       j++;
   return (j);
 }
@@ -45,18 +45,19 @@ char	*rev_substr(char *str,
   return (nw);
 }
 
-char    *trimstr(char *str)
+char    *trimstr(char *str, char c)
 {
   int   i;
   int   j;
 
   i = (j = 0);
-  while(str && str[i])
+  while (str && str[i])
     {
-      if (str[i] != ' ' && str[i] != '\t')
+      if (c ? str[i] != c : str[i] != ' ' && str[i] != '\t')
 	{
-	  if (i && j && (str[i - 1] == ' ' || str [i - 1] == '\t'))
-	    str[j++] = ' ';
+	  if (i && j && (c ? str[i - 1] == c :
+			 str[i - 1] == ' ' || str [i - 1] == '\t'))
+	    str[j++] = c ? c : ' ';
 	  str[j++] = str[i++];
 	}
       else
@@ -86,14 +87,15 @@ char    **splitstr(char *str, char delimiter)
   int   k;
 
   i = -1;
+  trimstr(str, delimiter == ' ' ? 0 : delimiter);
   hold = str;
-  tab = malloc(sizeof(char *) * ((count_char(str, delimiter, true) + 2)));
+  if (!(tab = malloc(sizeof(char *) * ((count_char(str, delimiter) + 2)))))
+    return (NULL);
   k = 0;
   while (str[++i])
     if (str[(j = i)] == delimiter || !(str[(j = i + 1)]))
       {
-	if (!j || (str[j - 1]))
-	  tab[k++] = hold;
+	tab[k++] = hold;
 	hold = str + j + 1;
 	str[j] = 0;
       }

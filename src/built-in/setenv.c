@@ -5,12 +5,12 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Wed Mar  8 13:36:55 2017 romain pillot
-** Last update Wed Mar  8 13:43:58 2017 romain pillot
+** Last update Wed Mar  8 22:53:26 2017 romain pillot
 */
 
 #include "builtin.h"
 
-void	setenv(t_shell *shell, char **args)
+void	setenv_alt(t_shell *shell, char **args)
 {
 
 }

@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Fri Mar  3 02:18:12 2017 romain pillot
-** Last update Wed Mar  8 21:24:27 2017 romain pillot
+** Last update Thu Mar  9 16:29:46 2017 romain pillot
 */
 
 #include "minishell.h"
@@ -24,7 +24,7 @@ static void	display_prompt()
   sub = NULL;
   if (getcwd(path, 1024))
     {
-      display(count_char(path, '/', false) > 2 ?
+      display(count_char(path, '/') > 2 ?
 	      (sub = rev_substr(path, '/', 2)) : path);
       display("> ");
       if (sub)
@@ -40,17 +40,10 @@ static void     exit_handle()
   display_prompt();
 }
 
-static void	parse(t_shell *shell, char *cmd_line)
-{
-  char		**args;
-
-  args = splitstr(cmd_line, ' ');
-  free(args);
-}
-
 void	launch(t_shell *shell, int file)
 {
   char	*cmd_line;
+  char	**args;
 
   signal(SIGINT, &exit_handle);
   while (shell->status == -1)
@@ -61,7 +54,10 @@ void	launch(t_shell *shell, int file)
 	shell->exit(shell, EXIT_SUCCESS, shell->isatty ? "exit\n" : NULL);
       else
 	{
-	  parse(shell, cmd_line);
+	  args = splitstr(cmd_line, ' ');
+	  if (args && *args)
+	    shell->cmds[get_cmd_index(*args)](shell, args);
+	  free(args);
 	  free(cmd_line);
 	}
     }

@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Wed Mar  8 11:44:53 2017 romain pillot
-** Last update Wed Mar  8 21:14:09 2017 romain pillot
+** Last update Thu Mar  9 12:09:34 2017 romain pillot
 */
 
 #include "environment.h"
@@ -43,7 +43,8 @@ char    **copy_env(char **env, char **overwrite)
   char  **hold;
 
   added = tab_length(env) - count_similar_keys(env, overwrite);
-  hold = (new  = malloc(sizeof(char *) * (tab_length(env) + added + 1)));
+  if (!(hold = (new  = malloc(sizeof(char *) * (tab_length(env) + added + 1)))))
+    return (NULL);
   while(env && (str = *env++))
     {
       split = splitstr((tofree = strdupl(str)), '=');
@@ -64,6 +65,6 @@ char    **get_paths(char **env)
 
   while ((str = *env++))
     if (start_withstr(str, "PATH"))
-      return (splitstr(str + 5, ':'));
+      return (splitstr(strdupl(str + 5), ':'));
   return (NULL);
 }
