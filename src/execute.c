@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Mar  9 14:13:51 2017 romain pillot
-** Last update Thu Mar  9 17:00:50 2017 romain pillot
+** Last update Fri Mar 10 02:01:55 2017 romain pillot
 */
 
 #include "environment.h"
@@ -18,14 +18,20 @@
 #include <errno.h>
 #include <string.h>
 #include <sys/wait.h>
+#include <stdio.h>
 
-static void	execute(t_shell *shell, char **args)
+static void	execute(t_shell *shell, char *path, char **args)
 {
-  int		pid;
-  
+  pid_t		pid;
+  int		wstatus;
+
   if ((pid = fork()) == -1)
     perror("fork");
-  else if ((
+  else if (pid == CHILD_PROCESS && execve(path, args, shell->env) == -1)
+    perror("execve");
+  else
+    while (waitpid(pid, &wstatus, 0) != -1 &&
+	   !WIFEXITED(wstatus));
 }
 
 static int	try_exec_access(char *path, char **denied)
@@ -44,7 +50,7 @@ static int	try_exec_access(char *path, char **denied)
       }
   else
     right = NOT_FOUND;
-  if (right != DENIED)
+  if (right == NOT_FOUND)
     safe_free(path);
   return (right);
 }
@@ -65,7 +71,8 @@ void            search_cmd(t_shell *shell, char **args)
       str = concatstr(str, *args, true);
       if ((right = try_exec_access(str, &denied)) == ACCESS)
 	{
-	  execute(shell, args);
+	  execute(shell, str, args);
+	  free(str);
 	  break;
 	}
     }

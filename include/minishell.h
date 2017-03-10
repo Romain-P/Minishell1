@@ -5,13 +5,15 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Nov 24 11:15:51 2016 romain pillot
-** Last update Thu Mar  9 21:03:03 2017 romain pillot
+** Last update Thu Mar  9 23:07:58 2017 romain pillot
 */
 
 #ifndef MINISHELL_H_
 # define MINISHELL_H_
 
 # include "stdbool.h"
+
+# define CHILD_PROCESS	(0)
 
 # define CMDS		(6)
 # define CD		(0)
@@ -21,7 +23,6 @@
 # define EXIT		(4)
 # define SEARCH_CMD	(5)
 
-/* Binary Access */
 # define NOT_FOUND	(0)
 # define DENIED		(-1)
 # define ACCESS		(1)
