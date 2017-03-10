@@ -1,5 +1,5 @@
 # Minishell1
-Clone this project with `git clone https://github.com/romain-p/minishell1  
+Clone this project with `git clone https://github.com/romain-p/minishell1`  
 ##### What is it
 A simple shell in which you can write commands such as `ls` or other any existed unix binaries.  
 Pipes and multi-processes line commands are not handled.  
