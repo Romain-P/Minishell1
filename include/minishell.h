@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Nov 24 11:15:51 2016 romain pillot
-** Last update Thu Mar  9 23:07:58 2017 romain pillot
+** Last update Sat Mar 11 17:04:58 2017 romain pillot
 */
 
 #ifndef MINISHELL_H_
@@ -33,7 +33,6 @@ typedef struct		s_shell
 {
   bool			isatty;
   char			**env;
-  void			(*cmds[CMDS]) (struct s_shell *shell, char **args);
   int			status;
   void			(*exit)(struct s_shell *shell, int status, char *message);
 }			t_shell;

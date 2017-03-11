@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Nov 24 11:14:29 2016 romain pillot
-** Last update Thu Mar  9 21:03:31 2017 romain pillot
+** Last update Sat Mar 11 17:04:46 2017 romain pillot
 */
 
 #include <stdlib.h>
@@ -35,25 +35,6 @@ static int	open_file(const char *file_name, t_shell *shell)
   return (file);
 }
 
-static	void	set_pointers(t_shell *shell)
-{
-  shell->cmds[CD] = &cd_alt;
-  shell->cmds[ENV] = &env_alt;
-  shell->cmds[SETENV] = &setenv_alt;
-  shell->cmds[UNSETENV] = &unsetenv_alt;
-  shell->cmds[EXIT] = &exit_alt;
-  shell->cmds[SEARCH_CMD] = &search_cmd;
-}
-
-int	get_cmd_index(char *str)
-{
-  return (equalstr(str, "cd") ? CD :
-	  equalstr(str, "setenv") ? SETENV :
-	  equalstr(str, "unsetenv") ? UNSETENV :
-	  equalstr(str, "env") ? ENV :
-	  equalstr(str, "exit") ? EXIT : SEARCH_CMD);
-}
-
 int		main(int ac, char **args, char **env)
 {
   t_shell	*shell;
@@ -62,7 +43,6 @@ int		main(int ac, char **args, char **env)
 
   if (!(shell = malloc(sizeof(t_shell))))
     return (EXIT_FAILURE);
-  set_pointers(shell);
   shell->status = -1;
   shell->env = copy_env(env, NULL);
   if ((file = ac > 1 ? open_file(args[1], shell) : 0) != -1)
@@ -77,4 +57,13 @@ int		main(int ac, char **args, char **env)
   free_tab(shell->env);
   free(shell);
   return (status);
+}
+
+int     get_cmd_index(char *str)
+{
+  return (equalstr(str, "cd") ? CD :
+	  equalstr(str, "setenv") ? SETENV :
+	  equalstr(str, "unsetenv") ? UNSETENV :
+	  equalstr(str, "env") ? ENV :
+	  equalstr(str, "exit") ? EXIT : SEARCH_CMD);
 }

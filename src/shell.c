@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Fri Mar  3 02:18:12 2017 romain pillot
-** Last update Fri Mar 10 19:16:05 2017 romain pillot
+** Last update Sat Mar 11 17:06:21 2017 romain pillot
 */
 
 #include "minishell.h"
@@ -15,6 +15,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <signal.h>
+#include "builtin.h"
 
 static bool	has_child;
 
@@ -43,10 +44,14 @@ static void     exit_handle()
     display_prompt();
 }
 
-void	launch(t_shell *shell, int file)
+void		launch(t_shell *shell, int file)
 {
-  char	*cmd_line;
-  char	**args;
+  char		*cmd_line;
+  char		**args;
+  static void	(* const cmds[6]) (struct s_shell *shell, char **args) =
+    {
+      &cd_alt, &setenv_alt, &unsetenv_alt, &env_alt, &exit_alt, &search_cmd
+    };
 
   signal(SIGINT, &exit_handle);
   while (shell->status == -1)
@@ -61,7 +66,7 @@ void	launch(t_shell *shell, int file)
 	  has_child = true;
 	  args = splitstr(cmd_line, ' ');
 	  if (args && *args)
-	    shell->cmds[get_cmd_index(*args)](shell, args);
+	    cmds[get_cmd_index(*args)](shell, args);
 	  free(args);
 	  free(cmd_line);
 	}
