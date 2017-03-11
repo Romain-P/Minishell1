@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Nov 24 11:14:29 2016 romain pillot
-** Last update Sat Mar 11 17:04:46 2017 romain pillot
+** Last update Sat Mar 11 19:44:25 2017 romain pillot
 */
 
 #include <stdlib.h>
@@ -14,7 +14,6 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include "environment.h"
-#include "builtin.h"
 
 static void	exit_shell(t_shell *shell, int status, char *msg)
 {
@@ -57,13 +56,4 @@ int		main(int ac, char **args, char **env)
   free_tab(shell->env);
   free(shell);
   return (status);
-}
-
-int     get_cmd_index(char *str)
-{
-  return (equalstr(str, "cd") ? CD :
-	  equalstr(str, "setenv") ? SETENV :
-	  equalstr(str, "unsetenv") ? UNSETENV :
-	  equalstr(str, "env") ? ENV :
-	  equalstr(str, "exit") ? EXIT : SEARCH_CMD);
 }

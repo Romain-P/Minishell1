@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Fri Mar  3 02:18:12 2017 romain pillot
-** Last update Sat Mar 11 17:06:21 2017 romain pillot
+** Last update Sat Mar 11 19:44:04 2017 romain pillot
 */
 
 #include "minishell.h"
@@ -71,4 +71,13 @@ void		launch(t_shell *shell, int file)
 	  free(cmd_line);
 	}
     }
+}
+
+int     get_cmd_index(char *str)
+{
+  return (equalstr(str, "cd") ? CD :
+	  equalstr(str, "setenv") ? SETENV :
+	  equalstr(str, "unsetenv") ? UNSETENV :
+	  equalstr(str, "env") ? ENV :
+	  equalstr(str, "exit") ? EXIT : SEARCH_CMD);
 }
