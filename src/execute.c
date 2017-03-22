@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Mar  9 14:13:51 2017 romain pillot
-** Last update Fri Mar 10 02:01:55 2017 romain pillot
+** Last update Wed Mar 22 14:49:57 2017 romain pillot
 */
 
 #include "environment.h"
@@ -34,7 +34,7 @@ static void	execute(t_shell *shell, char *path, char **args)
 	   !WIFEXITED(wstatus));
 }
 
-static int	try_exec_access(char *path, char **denied)
+static int	try_exec_access(char *path, char **denied, bool freepath)
 {
   struct stat	rights;
   int		right;
@@ -50,34 +50,49 @@ static int	try_exec_access(char *path, char **denied)
       }
   else
     right = NOT_FOUND;
-  if (right == NOT_FOUND)
+  if (right == NOT_FOUND && freepath)
     safe_free(path);
   return (right);
 }
 
-void            search_cmd(t_shell *shell, char **args)
+static int	check_paths(t_shell *shell, char **args, char **denied)
 {
-  char          **paths;
-  char          **hold;
-  char          *str;
-  char		*denied;
+  char		*str;
+  char		**hold;
+  char		**paths;
   int		right;
 
   paths = (hold = get_paths(shell->env));
-  denied = NULL;
-  while ((str = *paths++))
+  right = NOT_FOUND;
+  while (paths && (str = *paths++))
     {
       str = concatstr(str, "/", false);
       str = concatstr(str, *args, true);
-      if ((right = try_exec_access(str, &denied)) == ACCESS)
+      if ((right = try_exec_access(str, denied, true)) == ACCESS)
 	{
 	  execute(shell, str, args);
 	  free(str);
 	  break;
 	}
     }
+  safe_freesub(hold, true);
+  return (right);
+}
+
+void            search_cmd(t_shell *shell, char **args)
+{
+  char          *str;
+  char		*denied;
+  int		right;
+  bool		has_slash;
+
+  denied = NULL;
+  if ((has_slash = count_char(*args, '/') > 0) &&
+      (right = try_exec_access(*args, &denied, false)) == ACCESS)
+    execute(shell, *args, args);
+  else if (!has_slash)
+    right = check_paths(shell, args, &denied);
   display(right == ACCESS ? NULL : denied ? denied : args[0]);
   display(right == ACCESS ? NULL : denied ? DENIED_STR : NFOUND_STR);
   safe_free(denied);
-  safe_freesub(hold, true);
 }
