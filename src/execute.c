@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Mar  9 14:13:51 2017 romain pillot
-** Last update Wed Mar 22 14:49:57 2017 romain pillot
+** Last update Wed Mar 22 14:57:29 2017 romain pillot
 */
 
 #include "environment.h"
@@ -28,7 +28,10 @@ static void	execute(t_shell *shell, char *path, char **args)
   if ((pid = fork()) == -1)
     perror("fork");
   else if (pid == CHILD_PROCESS && execve(path, args, shell->env) == -1)
-    perror("execve");
+    {
+      perror("execve");
+      shell->exit(shell, EXIT_FAILURE, NULL);
+    }
   else
     while (waitpid(pid, &wstatus, 0) != -1 &&
 	   !WIFEXITED(wstatus));
