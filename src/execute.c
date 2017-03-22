@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Mar  9 14:13:51 2017 romain pillot
-** Last update Wed Mar 22 15:24:58 2017 romain pillot
+** Last update Wed Mar 22 16:22:38 2017 romain pillot
 */
 
 #include "environment.h"
@@ -36,7 +36,7 @@ static void	execute(t_shell *shell, char *path, char **args)
     while (waitpid(pid, &wstatus, 0) != -1 &&
 	   !WIFEXITED(wstatus))
       if (WIFSIGNALED(wstatus) && WTERMSIG(wstatus) == SIGSEGV)
-	display("Segmentation fault (core dumped)\n");
+	display(SEGFAULT_STR);
 }
 
 static int	try_exec_access(char *path, char **denied, bool freepath)

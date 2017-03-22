@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Thu Nov 24 11:15:51 2016 romain pillot
-** Last update Sat Mar 11 17:04:58 2017 romain pillot
+** Last update Wed Mar 22 16:22:27 2017 romain pillot
 */
 
 #ifndef MINISHELL_H_
@@ -28,6 +28,7 @@
 # define ACCESS		(1)
 # define DENIED_STR	(": Permission denied.\n")
 # define NFOUND_STR	(": Command not found.\n")
+# define SEGFAULT_STR	("Segmentation fault (core dumped)\n")
 
 typedef struct		s_shell
 {
