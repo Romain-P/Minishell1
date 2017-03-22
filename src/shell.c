@@ -5,7 +5,7 @@
 ** Login   <romain.pillot@epitech.net>
 ** 
 ** Started on  Fri Mar  3 02:18:12 2017 romain pillot
-** Last update Sat Mar 11 19:44:04 2017 romain pillot
+** Last update Wed Mar 22 17:01:30 2017 romain pillot
 */
 
 #include "minishell.h"
@@ -44,14 +44,27 @@ static void     exit_handle()
     display_prompt();
 }
 
-void		launch(t_shell *shell, int file)
+static void	apply_command(t_shell *shell, char *cmd_line)
 {
-  char		*cmd_line;
   char		**args;
-  static void	(* const cmds[6]) (struct s_shell *shell, char **args) =
+  char		*tofree;
+  static void   (* const cmds[6]) (struct s_shell *shell, char **args) =
     {
       &cd_alt, &setenv_alt, &unsetenv_alt, &env_alt, &exit_alt, &search_cmd
     };
+  
+  args = splitstr(strdupl(cmd_line), ' ');
+  if (args && *args)
+    cmds[get_cmd_index(*args)](shell, args);
+  free(*args);
+  free(args);
+}
+
+void		launch(t_shell *shell, int file)
+{
+  char		*cmds_line;
+  char		**cmds;
+  int		i;
 
   signal(SIGINT, &exit_handle);
   while (shell->status == -1)
@@ -59,16 +72,17 @@ void		launch(t_shell *shell, int file)
       has_child = false;
       if (shell->isatty)
 	display_prompt();
-      if (!(cmd_line = scan_line(file)))
+      if (!(cmds_line = scan_line(file)))
 	shell->exit(shell, EXIT_SUCCESS, shell->isatty ? "exit\n" : NULL);
       else
 	{
 	  has_child = true;
-	  args = splitstr(cmd_line, ' ');
-	  if (args && *args)
-	    cmds[get_cmd_index(*args)](shell, args);
-	  free(args);
-	  free(cmd_line);
+	  cmds = splitstr(cmds_line, ';');
+	  i = -1;
+	  while (cmds[++i])
+	    apply_command(shell, cmds[i]);
+	  free(cmds);
+	  free(cmds_line);
 	}
     }
 }
